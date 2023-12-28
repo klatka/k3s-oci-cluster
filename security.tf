@@ -35,6 +35,13 @@ resource "oci_core_default_security_list" "default_security_list" {
     description = "Allow all from vcn subnet"
   }
 
+  ingress_security_rules {
+    protocol = "all"
+    source   = var.my_public_ip_cidr
+
+    description = "Allow all from ${var.my_public_ip_cidr}"
+  }
+
   freeform_tags = {
     "provisioner"           = "terraform"
     "environment"           = "${var.environment}"
